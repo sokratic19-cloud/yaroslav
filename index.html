@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FADE — Барбершоп. Твой стиль. Без компромиссов.</title>
+<style>
+  /* === Базовые стили === */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Arial', sans-serif;
+    background: #0e0e0e;
+    color: #e8e8e8;
+    line-height: 1.6;
+  }
+  a { color: inherit; text-decoration: none; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+  .gold { color: #d4af37; }
+  .btn {
+    display: inline-block;
+    background: #d4af37;
+    color: #0e0e0e;
+    padding: 14px 32px;
+    border-radius: 50px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: none;
+    cursor: pointer;
+    transition: all .3s ease;
+  }
+  .btn:hover {
+    background: #f0c850;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(212,175,55,.4);
+  }
+  h1, h2, h3 { font-weight: 900; letter-spacing: 1px; }
+
+  /* === Шапка === */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid #222;
+  }
+  .logo {
+    font-size: 28px;
+    font-weight: 900;
+    letter-spacing: 3px;
+  }
+  nav ul { display: flex; gap: 30px; list-style: none; }
+  nav a { font-size: 14px; text-transform: uppercase; transition: color .2s; }
+  nav a:hover { color: #d4af37; }
+
+  /* === Главный экран === */
+  .hero {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 40px;
+    align-items: center;
+    padding: 80px 0;
+  }
+  .hero h1 {
+    font-size: 64px;
+    line-height: 1.05;
+    margin-bottom: 20px;
+  }
+  .hero .slogan {
+    font-size: 20px;
+    color: #d4af37;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  .hero-img {
+    width: 100%;
+    height: 450px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a2018 100%);
+    background-image: url('hero.jpg');
+    background-size: cover;
+    background-position: center;
+    border: 2px solid #d4af37;
+    box-shadow: 0 20px 60px rgba(0,0,0,.6);
+  }
+
+  /* === Блок "Почему мы" === */
+  .section { padding: 80px 0; }
+  .section-title {
+    text-align: center;
+    font-size: 40px;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+  }
+  .features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+  }
+  .card {
+    background: #171717;
+    padding: 35px 25px;
+    border-radius: 18px;
+    border: 1px solid #262626;
+    transition: all .3s;
+  }
+  .card:hover {
+    border-color: #d4af37;
+    transform: translateY(-5px);
+  }
+  .card .icon {
+    font-size: 40px;
+    margin-bottom: 15px;
+    color: #d4af37;
+  }
+  .card h3 { font-size: 20px; margin-bottom: 10px; }
+  .card p { color: #aaa; font-size: 15px; }
+
+  /* === Мастер месяца === */
+  .master {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 40px;
+    align-items: center;
+    background: linear-gradient(90deg, #171717, #0e0e0e);
+    padding: 50px;
+    border-radius: 24px;
+    border-left: 4px solid #d4af37;
+  }
+  .master-photo {
+    width: 100%;
+    height: 320px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #2a2a2a, #3a2e1a);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 80px;
+    color: #d4af37;
+    border: 1px solid #333;
+  }
+  .master h3 { font-size: 32px; margin-bottom: 10px; }
+  .master .role { color: #d4af37; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; }
+
+  /* === Цены === */
+  .prices {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+  }
+  .price-card {
+    background: #171717;
+    padding: 40px 30px;
+    border-radius: 18px;
+    text-align: center;
+    border: 1px solid #262626;
+    transition: all .3s;
+  }
+  .price-card:hover { border-color: #d4af37; }
+  .price-card.featured {
+    border: 2px solid #d4af37;
+    background: linear-gradient(180deg, #1c1a12, #171717);
+  }
+  .price-card h3 { font-size: 22px; margin-bottom: 15px; }
+  .price {
+    font-size: 48px;
+    color: #d4af37;
+    font-weight: 900;
+    margin: 15px 0;
+  }
+  .price small { font-size: 18px; color: #888; }
+
+  /* === Отзывы === */
+  .reviews {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+  }
+  .review {
+    background: #171717;
+    padding: 30px;
+    border-radius: 18px;
+    border-left: 3px solid #d4af37;
+  }
+  .review .author {
+    margin-top: 15px;
+    font-weight: 700;
+    color: #d4af37;
+  }
+
+  /* === Подвал === */
+  footer {
+    background: #080808;
+    padding: 50px 0 25px;
+    border-top: 1px solid #222;
+    margin-top: 40px;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-bottom: 30px;
+  }
+  .footer-grid h4 {
+    color: #d4af37;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .footer-grid p, .footer-grid a { color: #aaa; display: block; margin-bottom: 8px; }
+  .footer-grid a:hover { color: #d4af37; }
+  .copyright {
+    text-align: center;
+    color: #555;
+    padding-top: 20px;
+    border-top: 1px solid #1a1a1a;
+    font-size: 13px;
+  }
+
+  /* === Адаптив === */
+  @media (max-width: 768px) {
+    .hero, .master, .features, .prices, .reviews, .footer-grid {
+      grid-template-columns: 1fr;
+    }
+    .hero h1 { font-size: 42px; }
+    nav ul { gap: 15px; }
+    header { flex-direction: column; gap: 15px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- === ШАПКА === -->
+<div class="container">
+  <header>
+    <div class="logo">FADE<span class="gold">.</span></div>
+    <nav>
+      <ul>
+        <li><a href="#features">О нас</a></li>
+        <li><a href="#prices">Цены</a></li>
+        <li><a href="#contacts">Контакты</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- === ГЛАВНЫЙ ЭКРАН === -->
+  <section class="hero">
+    <div>
+      <h1>СТРИЖКА,<br>КОТОРАЯ <span class="gold">ГОВОРИТ</span><br>ЗА ТЕБЯ.</h1>
+      <p class="slogan">Твой стиль. Без компромиссов.</p>
+      <button class="btn" onclick="alert('Заявка принята! Мы свяжемся с тобой в ближайшее время.')">Оставить заявку</button>
+    </div>
+    <!-- Картинка hero.jpg должна лежать рядом с index.html -->
+    <div class="hero-img"></div>
+  </section>
+</div>
+
+<!-- === ПОЧЕМУ МЫ === -->
+<section class="section" id="features">
+  <div class="container">
+    <h2 class="section-title">Почему <span class="gold">мы</span></h2>
+    <div class="features">
+      <div class="card">
+        <div class="icon">⚡</div>
+        <h3>Онлайн-запись в 2 клика</h3>
+        <p>Никаких звонков и ожидания. Выбирай время и мастера прямо с телефона.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🏆</div>
+        <h3>Мастера-призёры</h3>
+        <p>Наши барберы — участники и победители чемпионатов по стрижке. Уровень — топ.</p>
+      </div>
+      <div class="card">
+        <div class="icon">💰</div>
+        <h3>Скидка на первый визит</h3>
+        <p>Приходи впервые — получи скидку 20%. Проверь нас на деле, прежде чем стать своим.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- === МАСТЕР МЕСЯЦА === -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">Мастер <span class="gold">месяца</span></h2>
+    <div class="master">
+      <div class="master-photo">✂</div>
+      <div>
+        <h3>Артём «Fade» Волков</h3>
+        <p class="role">Топ-барбер · 7 лет опыта</p>
+        <p>Победитель Russian Barber Battle 2025. Специализируется на сложных фейдах и авторских дизайнах. К нему запись расписана на 2 недели вперёд — но оно того стоит.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- === ЦЕНЫ === -->
+<section class="section" id="prices">
+  <div class="container">
+    <h2 class="section-title">Наши <span class="gold">цены</span></h2>
+    <div class="prices">
+      <div class="price-card">
+        <h3>Мужская стрижка</h3>
+        <div class="price">1200<small> ₽</small></div>
+        <p>Классика, фейд, кроп — любой формат под твою голову.</p>
+        <br>
+        <button class="btn">Записаться</button>
+      </div>
+      <div class="price-card featured">
+        <h3>Стрижка + борода</h3>
+        <div class="price">1800<small> ₽</small></div>
+        <p>Полный образ: стрижка, моделирование бороды, уход.</p>
+        <br>
+        <button class="btn">Записаться</button>
+      </div>
+      <div class="price-card">
+        <h3>Королевское бритьё</h3>
+        <div class="price">1500<small> ₽</small></div>
+        <p>Горячее полотенце, опасная бритва, премиум-косметика.</p>
+        <br>
+        <button class="btn">Записаться</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- === ОТЗЫВЫ === -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">Что говорят <span class="gold">парни</span></h2>
+    <div class="reviews">
+      <div class="review">
+        <p>«Зашёл впервые по рекомендации — и залип. Фейд сделали ровно, борода теперь как с обложки. Атмосфера — огонь, музыка, виски, всё по-мужски. Теперь только сюда.»</p>
+        <div class="author">— Даниил, 22 года</div>
+      </div>
+      <div class="review">
+        <p>«Записался за минуту через сайт, пришёл — приняли без опозданий. Мастер сразу понял, что нужно, без лишних вопросов. Стрижка держит форму уже третью неделю. Респект.»</p>
+        <div class="author">— Марк, 19 лет</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- === ПОДВАЛ === -->
+<footer id="contacts">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h4>Контакты</h4>
+        <p>ул. Тверская, 15, Москва</p>
+        <p>+7 (999) 123-45-67</p>
+        <p>Ежедневно 10:00 — 22:00</p>
+      </div>
+      <div>
+        <h4>Соцсети</h4>
+        <a href="#">Instagram</a>
+        <a href="#">Telegram</a>
+        <a href="#">VK</a>
+        <a href="#">TikTok</a>
+      </div>
+      <div>
+        <h4>FADE.</h4>
+        <p>Барбершоп для тех, кто знает себе цену. Без лишнего. По делу.</p>
+      </div>
+    </div>
+    <div class="copyright">© 2026 FADE Barbershop. Все права защищены.</div>
+  </div>
+</footer>
+
+</body>
+</html>
